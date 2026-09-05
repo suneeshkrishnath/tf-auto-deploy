@@ -62,7 +62,7 @@ Outputs:
 3. Confirm DEV artifact key prefix (example: `lambda/dev/`) to keep S3 access least-privilege.
 4. If KMS is used, provide DEV KMS key ARN(s); otherwise keep `kms_key_arns = []`.
 
-### 5. Artifact Reference Module (`modules/s3_artifact`)
+### 5. Artifact Reference Module (`modules/s3_artifact`) ✅ DONE
 Define and validate artifact inputs:
 - `artifact_bucket`
 - `artifact_key`
@@ -70,6 +70,12 @@ Define and validate artifact inputs:
 - Optional layer artifact key/version
 
 Use immutable S3 object versions so each deployment is reproducible.
+
+**Todo from SUNEESH in AWS (for Stage 5):**
+1. Keep DEV artifact in root path with key `weather-lambda-0.1.jar` (current value provided by SUNEESH).
+2. Use GitHub secret `S3_BUCKET_NAME` as the `artifact_bucket` source in workflow/vars.
+3. After uploading artifact, copy and set `artifact_version` (S3 Version ID) in DEV tfvars.
+4. Convert/package Java artifact to Lambda-supported deployment package format before function deployment (zip-based package recommended).
 
 ### 6. Lambda Layer Module (`modules/lambda_layer`)
 Create a Lambda layer from S3 artifact:
