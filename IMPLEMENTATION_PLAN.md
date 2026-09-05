@@ -77,13 +77,20 @@ Use immutable S3 object versions so each deployment is reproducible.
 3. After uploading artifact, copy and set `artifact_version` (S3 Version ID) in DEV tfvars.
 4. Convert/package Java artifact to Lambda-supported deployment package format before function deployment (zip-based package recommended).
 
-### 6. Lambda Layer Module (`modules/lambda_layer`)
+### 6. Lambda Layer Module (`modules/lambda_layer`) ✅ DONE
 Create a Lambda layer from S3 artifact:
 - `aws_lambda_layer_version` with `s3_bucket`, `s3_key`, `s3_object_version`
 - Set compatible runtimes/architectures
 
 Outputs:
 - `lambda_layer_arn`
+
+**Todo from SUNEESH in AWS (for Stage 6 - Optional):**
+1. **If not using a Lambda layer:** No action required (layers are optional).
+2. **If using a Lambda layer:**
+   - Package layer files into a `.zip` following AWS structure (e.g., `java/lib/` for Java).
+   - Upload the `.zip` to your S3 artifact bucket with versioning enabled.
+   - Note the S3 key (`layer_artifact_key`) and version ID (`layer_artifact_version`) for use in `dev.tfvars`.
 
 ### 7. Lambda Function Module (`modules/lambda_function`)
 Deploy Lambda from S3 artifact and attach layer:
