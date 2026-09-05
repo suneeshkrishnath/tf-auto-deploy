@@ -121,16 +121,23 @@ In root `main.tf`:
 2. Identify any environment variables your Lambda code expects at runtime (e.g., `SPRING_PROFILES_ACTIVE`, config values).
 3. Confirm common tags to attach to all AWS resources (e.g. `Project = "tf-auto-deploy"`, `Owner = "suneesh"`).
 
-### 9. Environment Configuration
+### 9. Environment Configuration ✅ DONE (DEV)
 For each environment (`dev`, `stage`, `prod`):
 - Use separate `*.tfvars`
 - Set function name, artifact key, and artifact version
 - Keep environment values isolated
 
 **Implementation scope update:**
-- `dev` -> implement now
+- `dev` -> ✅ implemented in `terraform/environments/dev.tfvars`
 - `stage`/`test` -> later implementation scope
 - `prod` -> later implementation scope
+
+**Todo from SUNEESH in AWS (for Stage 9 - DEV):**
+1. In `terraform/environments/dev.tfvars`:
+   - Replace `REPLACE_WITH_YOUR_ARTIFACT_BUCKET` with your actual S3 bucket name.
+   - Adjust `aws_region` if different from `eu-central-1`.
+   - Update `handler` to match your Java application's entrypoint class and method.
+   - Set `artifact_version` with the S3 Version ID of `weather-lambda-0.1.jar` after uploading.
 
 ### 10. CI/CD Integration
 Use GitHub Actions workflow to run:
