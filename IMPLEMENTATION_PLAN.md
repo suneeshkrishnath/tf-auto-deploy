@@ -92,7 +92,7 @@ Outputs:
    - Upload the `.zip` to your S3 artifact bucket with versioning enabled.
    - Note the S3 key (`layer_artifact_key`) and version ID (`layer_artifact_version`) for use in `dev.tfvars`.
 
-### 7. Lambda Function Module (`modules/lambda_function`)
+### 7. Lambda Function Module (`modules/lambda_function`) ✅ DONE
 Deploy Lambda from S3 artifact and attach layer:
 - `aws_lambda_function` with S3 bucket/key/version
 - Attach IAM role ARN from IAM module
@@ -105,6 +105,10 @@ Outputs:
 - `lambda_function_arn`
 - `lambda_version`
 
+**Todo from SUNEESH in AWS (for Stage 7):**
+1. Confirm handler string matching the application class and method (e.g. `com.example.Handler::handleRequest`).
+2. Confirm desired runtime (`java17` or `java21` for Java applications) and architecture (`x86_64` or `arm64`).
+3. Set appropriate memory size and timeout based on workload needs.
 ### 8. Root Module Wiring
 In root `main.tf`:
 1. Call `iam` module
