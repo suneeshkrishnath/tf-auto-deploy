@@ -26,7 +26,7 @@ terraform/
     lambda_function/
 ```
 
-### 2. Version and Provider Setup
+### 2. Version and Provider Setup ✅ DONE
 - Pin Terraform version (for example `>= 1.6.0`).
 - Pin AWS provider to a tested version range.
 - Keep version pins in `versions.tf`.
