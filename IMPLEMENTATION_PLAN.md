@@ -4,6 +4,8 @@
 
 This section describes what to build inside this repository using Terraform.
 
+> **Current scope:** Implement **DEV** environment now. **STAGE/TEST** and **PROD** are deferred to a later phase.
+
 ### 1. Project Structure ✅ DONE
 Create a clean Terraform layout so each concern is separated:
 
@@ -26,15 +28,24 @@ terraform/
     lambda_function/
 ```
 
-### 2. Version and Provider Setup
+### 2. Version and Provider Setup ✅ DONE
 - Pin Terraform version (for example `>= 1.6.0`).
 - Pin AWS provider to a tested version range.
 - Keep version pins in `versions.tf`.
 
-### 3. Backend and State Management
+### 3. Backend and State Management ✅ DONE
 - Start with local backend during initial development.
 - Move to remote backend (S3 + DynamoDB lock) before team usage.
 - Store backend settings in `backend.tf` or external `backend.hcl`.
+
+**Todo from SUNEESH in AWS (must be completed before `terraform init` with remote backend):**
+1. Create a private S3 bucket for Terraform state (enable versioning).
+2. Create a DynamoDB table for state lock with partition key `LockID` (type: String).
+3. Replace placeholders in `terraform/backend.tf`:
+   - `REPLACE_WITH_YOUR_TF_STATE_BUCKET`
+   - `REPLACE_WITH_YOUR_AWS_REGION`
+   - `REPLACE_WITH_YOUR_TF_LOCK_TABLE`
+4. Run `terraform init` from the `terraform` folder to initialize the backend.
 
 ### 4. IAM Module (`modules/iam`)
 Implement least-privilege IAM resources for Lambda:
@@ -87,6 +98,11 @@ For each environment (`dev`, `stage`, `prod`):
 - Use separate `*.tfvars`
 - Set function name, artifact key, and artifact version
 - Keep environment values isolated
+
+**Implementation scope update:**
+- `dev` -> implement now
+- `stage`/`test` -> later implementation scope
+- `prod` -> later implementation scope
 
 ### 10. CI/CD Integration
 Use GitHub Actions workflow to run:
@@ -214,6 +230,8 @@ Run workflow once with `terraform plan` only and verify:
 - Keep separate tfvars files
 - Use GitHub environments with approval gates
 - Promote by changing artifact version IDs intentionally
+
+**Note:** Stage/Test and Prod promotion steps are out of the current implementation scope and will be implemented later.
 
 ---
 
