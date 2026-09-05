@@ -4,7 +4,7 @@
 
 This section describes what to build inside this repository using Terraform.
 
-### 1. Project Structure
+### 1. Project Structure ✅ DONE
 Create a clean Terraform layout so each concern is separated:
 
 ```text
