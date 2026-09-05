@@ -109,12 +109,17 @@ Outputs:
 1. Confirm handler string matching the application class and method (e.g. `com.example.Handler::handleRequest`).
 2. Confirm desired runtime (`java17` or `java21` for Java applications) and architecture (`x86_64` or `arm64`).
 3. Set appropriate memory size and timeout based on workload needs.
-### 8. Root Module Wiring
+### 8. Root Module Wiring ✅ DONE
 In root `main.tf`:
 1. Call `iam` module
 2. Resolve S3 artifact references
 3. Call `lambda_layer` module
 4. Call `lambda_function` module with role ARN and layer ARN
+
+**Todo from SUNEESH in AWS (for Stage 8):**
+1. Decide whether `enable_layer` should be `true` or `false` for DEV (set to `false` if your jar contains all dependencies).
+2. Identify any environment variables your Lambda code expects at runtime (e.g., `SPRING_PROFILES_ACTIVE`, config values).
+3. Confirm common tags to attach to all AWS resources (e.g. `Project = "tf-auto-deploy"`, `Owner = "suneesh"`).
 
 ### 9. Environment Configuration
 For each environment (`dev`, `stage`, `prod`):
