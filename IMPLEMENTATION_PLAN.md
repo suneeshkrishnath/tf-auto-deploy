@@ -139,13 +139,25 @@ For each environment (`dev`, `stage`, `prod`):
    - Update `handler` to match your Java application's entrypoint class and method.
    - Set `artifact_version` with the S3 Version ID of `weather-lambda-0.1.jar` after uploading.
 
-### 10. CI/CD Integration
+### 10. CI/CD Integration ✅ DONE
 Use GitHub Actions workflow to run:
-1. `terraform init`
-2. `terraform fmt -check`
+1. `terraform fmt -check`
+2. `terraform init`
 3. `terraform validate`
 4. `terraform plan`
-5. `terraform apply` (protected branch/manual approval)
+5. `terraform apply` (on push to `main` or manual `workflow_dispatch`)
+
+Workflow file created at `.github/workflows/terraform-deploy.yml`.
+
+**Todo from SUNEESH in GitHub (for Stage 10):**
+1. **AWS Authentication in GitHub Repository Secrets/Variables:**
+   - **Option A (Recommended - OIDC):**
+     - Add repository variable or secret `AWS_ROLE_ARN` with your GitHub OIDC execution role ARN.
+     - Add repository variable `AWS_REGION` (e.g. `eu-central-1`).
+   - **Option B (Access Keys Fallback):**
+     - Add repository secrets: `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+     - Add repository variable `AWS_REGION` (e.g. `eu-central-1`).
+2. **Backend Configuration:** Ensure S3 state bucket and DynamoDB table placeholders in `terraform/backend.tf` are replaced before workflow runs `terraform init`.
 
 ### 11. Definition of Done (Terraform Side)
 - Terraform creates Lambda function, role, and layer.
