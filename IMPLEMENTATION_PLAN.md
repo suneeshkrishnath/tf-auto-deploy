@@ -47,7 +47,7 @@ terraform/
    - `REPLACE_WITH_YOUR_TF_LOCK_TABLE`
 4. Run `terraform init` from the `terraform` folder to initialize the backend.
 
-### 4. IAM Module (`modules/iam`)
+### 4. IAM Module (`modules/iam`) ✅ DONE
 Implement least-privilege IAM resources for Lambda:
 - Lambda execution role with trust policy for `lambda.amazonaws.com`.
 - Attach `AWSLambdaBasicExecutionRole`.
@@ -55,6 +55,12 @@ Implement least-privilege IAM resources for Lambda:
 
 Outputs:
 - `lambda_execution_role_arn`
+
+**Todo from SUNEESH in AWS (for Stage 4):**
+1. Decide DEV naming prefix value for IAM resources (example: `tf-auto-dev`).
+2. Confirm DEV artifact bucket name for Lambda read access policy.
+3. Confirm DEV artifact key prefix (example: `lambda/dev/`) to keep S3 access least-privilege.
+4. If KMS is used, provide DEV KMS key ARN(s); otherwise keep `kms_key_arns = []`.
 
 ### 5. Artifact Reference Module (`modules/s3_artifact`)
 Define and validate artifact inputs:
