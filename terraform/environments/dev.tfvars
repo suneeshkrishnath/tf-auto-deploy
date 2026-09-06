@@ -13,7 +13,7 @@ architectures        = ["x86_64"]
 
 # S3 Artifact Source
 # Set your private S3 bucket containing the Lambda artifact
-artifact_bucket  = "REPLACE_WITH_YOUR_ARTIFACT_BUCKET"
+artifact_bucket  = "bucket-weather-wo-app"
 artifact_key     = "weather-lambda-0.1.jar"
 # S3 object version ID for reproducible deployments (copy from S3 object properties after upload)
 artifact_version = null
