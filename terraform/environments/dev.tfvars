@@ -3,7 +3,7 @@ aws_region  = "eu-central-1"
 environment = "dev"
 
 # Lambda Function Configuration
-function_name        = "weather-service"
+function_name        = "weather-and-wo-app-v0"
 function_description = "Weather service Lambda deployed via Terraform and GitHub Actions"
 runtime              = "java17"
 handler              = "com.example.weather.StreamLambdaHandler::handleRequest"
