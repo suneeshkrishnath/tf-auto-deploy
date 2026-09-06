@@ -1,9 +1,9 @@
-﻿terraform {
+terraform {
   backend "s3" {
-    bucket         = "REPLACE_WITH_YOUR_TF_STATE_BUCKET"
+    bucket         = "weather-and-wo-app-v0"
     key            = "lambda/dev/terraform.tfstate"
-    region         = "REPLACE_WITH_YOUR_AWS_REGION"
-    dynamodb_table = "REPLACE_WITH_YOUR_TF_LOCK_TABLE"
+    region         = "eu-central-1"
+    dynamodb_table = "table-weather-lambda-auto-deploy"
     encrypt        = true
   }
 }
